@@ -1,7 +1,8 @@
 const Part = (props) => {
+  console.log(props)
  return (
      <p>
-         {props.part} {props.exercises}
+        {props.name} {props.exercises}
      </p>
  )
 
@@ -10,9 +11,10 @@ const Part = (props) => {
 const Content = (props) => {
     return (
       <div>
-          <Part part={props.part1} exercises={props.exercises1}/>
-          <Part part={props.part2} exercises={props.exercises2}/>
-          <Part part={props.part3} exercises={props.exercises3}/>
+        {props.parts.map(part => <Part name={part.name} exercises={part.exercises} />)}
+          {/* props de Content
+          parts del array en app 
+          map para iterar sobre cada parte del array, que son 3 y por cada uno crea una copia del componente */}
       </div>
     )
   }
