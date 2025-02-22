@@ -1,9 +1,12 @@
 
 
-const Display = ({counter, text}) => {
+const DisplayStatistics = ({ counter, text }) => {
     return (
-      <div>{text}{counter}</div>
+        <tr>
+            <td>{text}</td>
+            <td>{counter}</td>
+        </tr>
     )
-  }
+}
 
-  export default Display
+export default DisplayStatistics

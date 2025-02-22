@@ -1,6 +1,13 @@
 import { useState } from 'react'
 import Button from './button'
-import Display from './display'
+import DisplayStatistics from './display'
+
+const NoStatistics = ({ totalComments }) => {
+  return (
+    <div>No feedback given</div>
+  )
+
+}
 
 const App = () => {
   // guarda los clics de cada botón en su propio estado
@@ -20,6 +27,12 @@ const App = () => {
     setBad(bad + 1)
   }
 
+  const totalComments = good + neutral + bad
+
+  const average = (good - bad) / totalComments
+
+  const positive = (good / totalComments) * 100
+
 
 
   return (
@@ -32,13 +45,24 @@ const App = () => {
 
       <h1>statistics</h1>
 
-      <Display counter={good} text='Good ' />
-      <Display counter={neutral} text='Neutral '/>
-      <Display counter={bad} text='Bad '/>
+      {totalComments === 0 ? <NoStatistics /> :
+        <table>
+          <thead>    
+          </thead>
+          <tbody>
+            <DisplayStatistics counter={good} text='Good ' />
+            <DisplayStatistics counter={neutral} text='Neutral ' />
+            <DisplayStatistics counter={bad} text='Bad ' />
+            <DisplayStatistics counter={totalComments} text='All Comments ' />
+            <DisplayStatistics counter={average} text='Average ' />
+            <DisplayStatistics counter={positive} text='Positive %' />
+          </tbody>
+        </table>
+      }
 
 
 
-    </div>
+    </div >
   )
 }
 
