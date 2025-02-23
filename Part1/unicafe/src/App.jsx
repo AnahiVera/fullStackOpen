@@ -55,7 +55,7 @@ const App = () => {
             <DisplayStatistics counter={bad} text='Bad ' />
             <DisplayStatistics counter={totalComments} text='All Comments ' />
             <DisplayStatistics counter={average} text='Average ' />
-            <DisplayStatistics counter={positive} text='Positive %' />
+            <DisplayStatistics counter={positive} text='Positive' />
           </tbody>
         </table>
       }
