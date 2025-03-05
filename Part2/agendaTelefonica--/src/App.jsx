@@ -3,7 +3,8 @@ import Name from './Name'
 import Filter from './Filter'
 import PersonForm from './PersonForm'
 import contactService from './services/contacts'
-
+import Notification from './notification'
+import ErrorNotification from './errorNotification'
 
 
 const App = () => {
@@ -11,6 +12,8 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [message, setMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
 
   useEffect(() => {
@@ -20,6 +23,14 @@ const App = () => {
       .then(initialContacts => {
         console.log('promise fulfilled')
         setPersons(initialContacts)
+      })
+      .catch(error => {
+        setErrorMessage(
+          `Error`
+        )
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 3000)
       })
   }, [])
   console.log('render', persons.length, 'contacts')
@@ -43,7 +54,21 @@ const App = () => {
             setPersons(persons.map(person => person.id !== existingContact.id ? person : updatedContact))
             setNewName('')
             setNewNumber('')
+            setMessage(
+              `Updated contact ${newName}`
+            )
+            setTimeout(() => {
+              setMessage(null)
+            }, 3000)
           })
+          .catch(error => {
+            setErrorMessage(
+              `Information of ${newName} has already been removed from server`
+            )
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 3000)
+          })        
     } else {
       contactService
         .create(newObject)
@@ -51,7 +76,21 @@ const App = () => {
           setPersons(persons.concat(createdContact))
           setNewName('')
           setNewNumber('')
+          setMessage(
+            `Added contact ${newName}`
+          )
+          setTimeout(() => {
+            setMessage(null)
+          }, 3000)
         })
+        .catch(error => {
+          setErrorMessage(
+            `Error contact cannot be added`
+          )
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 3000)
+        })  
     }
   }
 
@@ -95,7 +134,8 @@ const App = () => {
 
 
 
-      ...
+      <Notification message={message} />
+      <ErrorNotification message={errorMessage} />
     </div>
   )
 }
