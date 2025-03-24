@@ -24,7 +24,7 @@ const App = () => {
         console.log('promise fulfilled')
         setPersons(initialContacts)
       })
-      .catch(error => {
+      .catch(() => {
         setErrorMessage(
           `Error`
         )
@@ -61,7 +61,7 @@ const App = () => {
               setMessage(null)
             }, 3000)
           })
-          .catch(error => {
+          .catch(() => {
             setErrorMessage(
               `Information of ${newName} has already been removed from server`
             )

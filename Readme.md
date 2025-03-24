@@ -31,9 +31,14 @@ I am currently working through the course and have completed the following parts
 - Gained experience with JavaScript promises and asynchronous programming.
 
 ### Part 3: Programming a Server with Node.js and Express
-- **Current Focus**: Building a backend server using Node.js and Express.
+- Building a backend server using Node.js and Express.
 - Learning to create RESTful APIs, handle HTTP requests, and manage data persistence.
 - Integrating the backend with the frontend for a full-stack application.
+
+### Part 4: Testing Express Servers, User Administration
+- **Current Focus**:Writing unit and integration tests for backend applications.
+- Implementing user authentication and authorization.
+- Managing user roles and permissions.
 
 ---
 
@@ -45,10 +50,6 @@ This repository is organized by parts, with each part containing its own directo
 
 Below is an overview of the remaining parts of the course, which I will work on as I progress:
 
-### Part 4: Testing Express Servers, User Administration
-- Writing unit and integration tests for backend applications.
-- Implementing user authentication and authorization.
-- Managing user roles and permissions.
 
 ### Part 5: Testing React Apps
 - Writing tests for React components using Jest and React Testing Library.
