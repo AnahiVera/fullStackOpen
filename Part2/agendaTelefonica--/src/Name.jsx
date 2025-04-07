@@ -1,7 +1,7 @@
 
 
 
-const Name = ({ name, number, handleDelete}) => {
+const Name = ({ name, number, handleDelete }) => {
   
   return (
     <div>

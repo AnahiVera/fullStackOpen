@@ -1,4 +1,8 @@
 import { useState, useEffect } from 'react'
+import { FaTrashAlt } from "react-icons/fa";
+import { IoMdContact } from "react-icons/io";
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import Name from './Name'
 import Filter from './Filter'
 import PersonForm from './PersonForm'
@@ -12,8 +16,8 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
-  const [message, setMessage] = useState(null)
-  const [errorMessage, setErrorMessage] = useState(null)
+  /* const [message, setMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null) */
 
 
   useEffect(() => {
@@ -25,12 +29,7 @@ const App = () => {
         setPersons(initialContacts)
       })
       .catch(() => {
-        setErrorMessage(
-          `Error`
-        )
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 3000)
+        toast.error('Error fetching contacts')
       })
   }, [])
   console.log('render', persons.length, 'contacts')
@@ -54,20 +53,10 @@ const App = () => {
             setPersons(persons.map(person => person.id !== existingContact.id ? person : updatedContact))
             setNewName('')
             setNewNumber('')
-            setMessage(
-              `Updated contact ${newName}`
-            )
-            setTimeout(() => {
-              setMessage(null)
-            }, 3000)
+            toast.success(`Updated contact ${newName}`)
           })
           .catch(() => {
-            setErrorMessage(
-              `Information of ${newName} has already been removed from server`
-            )
-            setTimeout(() => {
-              setErrorMessage(null)
-            }, 3000)
+            toast.error(`Information of ${newName} has already been removed from server`)
           })        
     } else {
       contactService
@@ -76,21 +65,11 @@ const App = () => {
           setPersons(persons.concat(createdContact))
           setNewName('')
           setNewNumber('')
-          setMessage(
-            `Added contact ${newName}`
-          )
-          setTimeout(() => {
-            setMessage(null)
-          }, 4000)
+          toast.success(`Added contact ${newName}`)
         })
         .catch(error => {
           console.log(error.response.data.error)
-          setErrorMessage(
-            `Error contact cannot be added`
-          ) 
-          setTimeout(() => {
-            setErrorMessage(null)
-          }, 4000)
+          toast.error('Number must be at least 8 digits')
         })  
     }
   }
@@ -117,28 +96,58 @@ const App = () => {
     ? persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
     : persons
 
-  return (
-    <div>
-      <h2>Phonebook</h2>
-      <Filter filter={filter} setFilter={setFilter} />
+    return (
+      <div className="container">
+        <h1>Phonebook</h1>
+        
+        <ToastContainer />
+        
+        
+        
+        <div className="section">
+          <h2>Add a new contact</h2>
+          <PersonForm 
+            addContact={addContact} 
+            newName={newName} 
+            handleNameChange={handleNameChange} 
+            newNumber={newNumber} 
+            handleNumberChange={handleNumberChange} 
+          />
+        </div>
 
-
-      <h2>Add a new contact</h2>
-      <PersonForm addContact={addContact} newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange} />
-
-
-      <h2>Numbers</h2>
-
-      <ul> {personsToShow.map(person =>
-        <Name key={person.id} name={person.name} number={person.number} handleDelete={() => handleDelete(person.id)} />)}
-      </ul>
-
-
-
-      <Notification message={message} />
-      <ErrorNotification message={errorMessage} />
-    </div>
-  )
+        <div className="section">
+          <Filter filter={filter} setFilter={setFilter} />
+        </div>
+        
+        <div className="section">
+  <h2>Contacts</h2>
+  <ul className="contact-list">
+    {personsToShow.map(person => (
+      <li key={person.id} className="contact-item d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center p-3 border-bottom">
+        {/* Name with icon */}
+        <div className="d-flex flex-column align-items-center align-items-md-start mb-2 mb-md-0">
+          <div className="d-flex align-items-center gap-2">
+            <IoMdContact className="contact-icon" />
+            <span className="contact-info text-center text-md-start">{person.name}</span>
+          </div>
+          {/* Number - shown below name on mobile */}
+          <span className="contact-number mt-1 ms-4 ms-md-0">{person.number}</span>
+        </div>
+        
+        {/* Delete button - centered on mobile, aligned right on desktop */}
+        <button 
+          type="button" 
+          className="delete-btn mt-2 mt-md-0"
+          onClick={() => handleDelete(person.id)}
+        >
+          <FaTrashAlt />
+        </button>
+      </li>
+    ))}
+  </ul>
+</div>
+      </div>
+    )
 }
 
 export default App

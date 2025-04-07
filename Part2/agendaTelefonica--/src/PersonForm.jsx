@@ -3,20 +3,22 @@ const PersonForm = ({ addContact, newName, handleNameChange, newNumber, handleNu
   return (
     <form onSubmit={addContact}>
         <div>
-          name:
+          
           <input
             value={newName}
-            onChange={handleNameChange} />
+            onChange={handleNameChange} 
+            placeholder="Contact name"/>
             
         </div>
         <div>
-          number:
+          
           <input
             value={newNumber}
-            onChange={handleNumberChange} />
+            onChange={handleNumberChange}
+            placeholder="Phone Number:"/>
             
         </div>
-        <div>
+        <div className="d-grid gap-2"> 
           <button type="submit">Add</button>
         </div>
       </form>
