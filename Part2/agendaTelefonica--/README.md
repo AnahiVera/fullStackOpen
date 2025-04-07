@@ -1,12 +1,41 @@
-# React + Vite
+# Phonebook Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack contact management system built with React that allows users to:
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ✨ **Add contacts** (with name + phone number validation)
+- 🔍 **Search/filter** existing contacts in real-time
+- ✏️ **Edit/update** contact information
+- 🗑️ **Delete entries** with confirmation
+- 💾 **Persistent storage** via backend API
 
-## Expanding the ESLint configuration
+## Technical Features
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Frontend
+✅ React with hooks (`useState`, `useEffect`)  
+✅ Responsive design (mobile-first with Bootstrap flex utilities)  
+✅ Interactive UI with React Icons (`FaTrashAlt`, `IoMdContact`)  
+✅ Toast notifications (`React-Toastify`) for user feedback  
+
+### Styling
+🎨 Custom dark theme with accessibility-focused contrast  
+⚡ CSS transitions for smooth interactions  
+🧩 Component-scoped styles for maintainability  
+
+### Backend Integration
+🔗 Axios-based service layer for CRUD operations  
+⚠️ Error handling for failed API requests  
+
+## Architecture
+- Single-page application (SPA) 
+- Clean component structure:
+  - `App` (Main container)
+  - `PersonForm` (Add/edit contacts)
+  - `Filter` (Search functionality)
+  - Contact list components
+
+## Purpose
+Demonstrates modern React patterns, state management, and API integration in a practical utility app.
+
+*Ideal for small businesses needing a lightweight CRM, or as a portfolio piece showcasing React skills.*
