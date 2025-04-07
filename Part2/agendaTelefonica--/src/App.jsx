@@ -7,8 +7,7 @@ import Name from './Name'
 import Filter from './Filter'
 import PersonForm from './PersonForm'
 import contactService from './services/contacts'
-import Notification from './notification'
-import ErrorNotification from './errorNotification'
+
 
 
 const App = () => {
@@ -16,8 +15,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
-  /* const [message, setMessage] = useState(null)
-  const [errorMessage, setErrorMessage] = useState(null) */
+
 
 
   useEffect(() => {
@@ -80,6 +78,7 @@ const App = () => {
       .deleteContact(id)
       .then(() => {
         setPersons(persons.filter(person => person.id !== id))
+        toast.success(`Deleted contact`)
       })
   }
 
